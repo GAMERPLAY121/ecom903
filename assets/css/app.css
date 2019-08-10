@@ -1,0 +1,8 @@
+body {
+    /*background-color: lightgray;*/
+}
+
+input.cart-item-count {
+	width: 4em;
+	text-align: right;
+}
