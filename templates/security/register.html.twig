@@ -5,7 +5,12 @@
 {% block body %}
 	<h1>Регистрация</h1>
 	{{ form_start(form) }}
-	{{ form_widget(form) }}
+	{{ form_row(form.email) }}
+	{{ form_row(form.plainPassword, {'label': 'Пароль'}) }}
+	{{ form_row(form.firstName, {'label': 'Имя'}) }}
+	{{ form_row(form.lastName, {'label': 'Фамилия'}) }}
+	{{ form_row(form.address, {'label': 'Адрес'}) }}
+
 	<div class="form-group row">
 		<div class="col-sm-10 offset-2">
 			<button type="submit" class="btn btn-primary">Зарегистрироваться</button>

@@ -128,6 +128,7 @@ class OrderService
         $this->save($order);
         $this->sessions->remove(self::SESSION_KEY);
         $this->sendAdminOrderMessage($order);
+        $this->sendUserOrderMessage($order);
     }
 
     private function sendAdminOrderMessage(Order $order)
@@ -137,6 +138,17 @@ class OrderService
         $message->from('noreply@shop.com');
         $message->subject('Новый заказ на сайте');
         $message->htmlTemplate('order/emails/admin.html.twig');
+        $message->context(['order' => $order]);
+        $this->mailer->send($message);
+    }
+
+    private function sendUserOrderMessage(Order $order)
+    {
+        $message = new TemplatedEmail();
+        $message->to(new Address($order->getEmail()));
+        $message->from('noreply@shop.com');
+        $message->subject('Вы сделали заказ на нашем сайте');
+        $message->htmlTemplate('order/emails/user.html.twig');
         $message->context(['order' => $order]);
         $this->mailer->send($message);
     }
